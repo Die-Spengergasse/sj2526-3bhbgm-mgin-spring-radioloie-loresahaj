@@ -1,17 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Greeting</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Radiologie System</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: #f5f7fa;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e5e5e5;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .card a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c7be5;
+        }
+
+        .date {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .grid {
+            margin-top: 30px;
+        }
+    </style>
 </head>
+
 <body>
+
 <div class="container">
-    <h1>Hallo</h1>
-    Datum: <span th:text="${today}"></span>
-    <div>
-        <a href="/patient/list">patient list</a>
+
+    <!-- 🟦 Header -->
+    <div class="header">
+        <h1>Radiologie System</h1>
+        <p class="date">
+            Datum: <span th:text="${today}"></span>
+        </p>
     </div>
+
+    <!-- 🟩 Navigation Cards -->
+    <div class="row grid">
+
+        <div class="col-sm-4">
+            <div class="card">
+                <p>Patientenverwaltung</p>
+                <a href="/patient/list">Patienten anzeigen</a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <p>Geräteverwaltung</p>
+                <a href="/device/list">Geräte anzeigen</a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <p>Reservierungen</p>
+                <a href="/reservation/list">Reservierungen anzeigen</a>
+            </div>
+        </div>
+
+    </div>
+
 </div>
+
 </body>
 </html>
