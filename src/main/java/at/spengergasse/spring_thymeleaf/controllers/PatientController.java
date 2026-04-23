@@ -1,7 +1,8 @@
-package at.spengergasse.spring_thymeleaf.controllers;
+package at.spengergasse.spring_thymeleaf.controller;
 
 import at.spengergasse.spring_thymeleaf.entities.Patient;
 import at.spengergasse.spring_thymeleaf.entities.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,33 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/patient")
 public class PatientController {
 
-    private final PatientRepository patientRepository;
-
-    public PatientController(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-    }
+    @Autowired
+    private PatientRepository patientRepository;
 
     @GetMapping("/list")
-    public String patients(Model model) {
+    public String list(Model model) {
         model.addAttribute("patients", patientRepository.findAll());
         return "patlist";
     }
 
     @GetMapping("/add")
-    public String addPatient(Model model) {
+    public String addForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "add_patient";
     }
 
-    @PostMapping("/add")
-    public String addPatient(@ModelAttribute("patient") Patient patient) {
+    @PostMapping("/save")
+    public String save(@ModelAttribute Patient patient) {
         patientRepository.save(patient);
-        return "redirect:/patient/list";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deletePatient(@PathVariable("id") int id) {
-        patientRepository.deleteById(id);
         return "redirect:/patient/list";
     }
 }

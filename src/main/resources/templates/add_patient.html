@@ -2,46 +2,82 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Neuer Patient</title>
+    <title>Patient registrieren – Radiologie Institut</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 30px; }
-        .wrapper { max-width: 400px; margin: auto; background: white; padding: 24px; border: 1px solid #ddd; }
-        h1 { font-size: 20px; font-weight: normal; margin: 0 0 20px; }
-        label { display: block; margin-top: 14px; font-size: 13px; color: #555; }
-        input, select { width: 100%; padding: 8px; margin-top: 4px;
-            border: 1px solid #ccc; font-size: 14px; box-sizing: border-box; }
-        input[type="submit"] { margin-top: 20px; background: black; color: white;
-            border: none; cursor: pointer; padding: 10px; }
-        input[type="submit"]:hover { background: #333; }
+        body { background: #f5f7fa; }
+        .container { margin-top: 40px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .card { background: white; padding: 30px; border: 1px solid #ddd; margin-top: 20px; }
+        .form-group label { font-weight: 600; }
+        .btn-primary { background-color: #2c6fad; border-color: #2c6fad; }
+        .btn-primary:hover { background-color: #245c91; }
+        .back-link { margin-bottom: 20px; display: inline-block; color: #2c6fad; }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <h1>Neuer Patient</h1>
-    <form th:action="@{/patient/add}" th:object="${patient}" method="post">
-        <label>Sozialversicherungsnummer</label>
-        <input type="text" th:field="*{socialsecuritynumber}" maxlength="10">
+<div class="container">
 
-        <label>Vorname</label>
-        <input type="text" th:field="*{name}">
+    <a th:href="@{/}" class="back-link">← Zurück zur Startseite</a>
 
-        <label>Nachname</label>
-        <input type="text" th:field="*{surname}">
+    <div class="header">
+        <h2>Radiologie Institut</h2>
+        <h4>Neuen Patienten registrieren</h4>
+    </div>
 
-        <label>Geschlecht</label>
-        <select th:field="*{gender}">
-            <option value="">-- Bitte wählen --</option>
-            <option value="F">Weiblich</option>
-            <option value="M">Männlich</option>
-            <option value="D">Divers</option>
-        </select>
+    <div class="card">
+        <form th:action="@{/patient/save}" th:object="${patient}" method="post">
 
-        <label>Geburtsdatum</label>
-        <input type="date" th:field="*{birth}">
+            <div class="form-group">
+                <label for="ssn">Sozialversicherungsnummer</label>
+                <input type="text" class="form-control" id="ssn"
+                       th:field="*{ssn}" placeholder="z.B. 1234010190" required />
+            </div>
 
-        <input type="submit" value="Speichern">
-    </form>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Vorname</label>
+                        <input type="text" class="form-control" id="name"
+                               th:field="*{name}" placeholder="Vorname" required />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="surname">Nachname</label>
+                        <input type="text" class="form-control" id="surname"
+                               th:field="*{surname}" placeholder="Nachname" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="gender">Geschlecht</label>
+                        <select class="form-control" id="gender" th:field="*{gender}" required>
+                            <option value="">– bitte wählen –</option>
+                            <option value="Männlich">Männlich</option>
+                            <option value="Weiblich">Weiblich</option>
+                            <option value="Divers">Divers</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="birth">Geburtsdatum</label>
+                        <input type="date" class="form-control" id="birth"
+                               th:field="*{birth}" required />
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <button type="submit" class="btn btn-primary">Patient registrieren</button>
+            <a th:href="@{/patient/list}" class="btn btn-default" style="margin-left:10px;">Abbrechen</a>
+
+        </form>
+    </div>
 </div>
 </body>
 </html>
-

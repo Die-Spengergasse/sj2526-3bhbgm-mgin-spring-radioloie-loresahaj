@@ -2,7 +2,7 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Radiologie System</title>
+    <title>Radiologie Institut</title>
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,40 +12,46 @@
             background: #f5f7fa;
         }
 
+        .container {
+            margin-top: 40px;
+        }
+
         .header {
             text-align: center;
-            margin-top: 40px;
             margin-bottom: 30px;
         }
 
         .card {
             background: white;
             padding: 20px;
-            border-radius: 6px;
-            border: 1px solid #e5e5e5;
+            border: 1px solid #ddd;
             text-align: center;
+            margin-top: 20px;
             transition: 0.2s;
         }
 
         .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .card a {
+            display: block;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            color: #2c7be5;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .card a:hover {
+            color: #000;
         }
 
         .date {
             color: #666;
-            margin-top: 10px;
-        }
-
-        .grid {
-            margin-top: 30px;
         }
     </style>
 </head>
@@ -54,35 +60,39 @@
 
 <div class="container">
 
-    <!-- 🟦 Header -->
     <div class="header">
-        <h1>Radiologie System</h1>
+        <h2>Radiologie Institut</h2>
         <p class="date">
             Datum: <span th:text="${today}"></span>
         </p>
     </div>
 
-    <!-- 🟩 Navigation Cards -->
-    <div class="row grid">
+    <div class="row">
 
+        <!-- Patienten -->
         <div class="col-sm-4">
             <div class="card">
-                <p>Patientenverwaltung</p>
-                <a href="/patient/list">Patienten anzeigen</a>
+                <div class="card-title">Patienten</div>
+                <a href="/patient/list">Patientenliste anzeigen</a>
+                <a href="/patient/add">Neuen Patienten registrieren</a>
             </div>
         </div>
 
+        <!-- Geräte -->
         <div class="col-sm-4">
             <div class="card">
-                <p>Geräteverwaltung</p>
-                <a href="/device/list">Geräte anzeigen</a>
+                <div class="card-title">Geräte</div>
+                <a href="/device/list">Geräteliste anzeigen</a>
+                <a href="/device/add">Neues Gerät hinzufügen</a>
             </div>
         </div>
 
+        <!-- Reservierungen -->
         <div class="col-sm-4">
             <div class="card">
-                <p>Reservierungen</p>
-                <a href="/reservation/list">Reservierungen anzeigen</a>
+                <div class="card-title">Reservierungen</div>
+                <a href="/reservation/add">Neue Reservierung erfassen</a>
+                <a href="/reservation/list">Reservierungsliste anzeigen</a>
             </div>
         </div>
 
