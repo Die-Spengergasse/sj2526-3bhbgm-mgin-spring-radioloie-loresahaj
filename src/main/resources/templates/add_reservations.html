@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservierung erfassen – Radiologie Institut</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body { background: #f5f7fa; }
+        .container { margin-top: 40px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .card { background: white; padding: 30px; border: 1px solid #ddd; margin-top: 20px; }
+        .form-group label { font-weight: 600; }
+        .btn-primary { background-color: #2c6fad; border-color: #2c6fad; }
+        .btn-primary:hover { background-color: #245c91; }
+        .back-link { margin-bottom: 20px; display: inline-block; color: #2c6fad; }
+        .section-title {
+            font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+            color: #2c6fad; font-weight: 700; margin: 20px 0 10px 0;
+            border-bottom: 2px solid #e8f0f9; padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <a th:href="@{/}" class="back-link">← Zurück zur Startseite</a>
+
+    <div class="header">
+        <h2>Radiologie Institut</h2>
+        <h4>Neue Reservierung erfassen</h4>
+    </div>
+
+    <!-- Fehlermeldung -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <strong>Fehler:</strong> <span th:text="${errorMessage}"></span>
+    </div>
+
+    <div class="card">
+        <form th:action="@{/reservation/save}" method="post">
+
+            <div class="section-title">Patient &amp; Gerät</div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="patientId">Patient</label>
+                        <select class="form-control" id="patientId" name="patientId" required>
+                            <option value="">– Patient auswählen –</option>
+                            <option th:each="p : ${patients}"
+                                    th:value="${p.id}"
+                                    th:text="${p.surname + ', ' + p.name + ' (' + p.ssn + ')'}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="deviceId">Gerät</label>
+                        <select class="form-control" id="deviceId" name="deviceId" required>
+                            <option value="">– Gerät auswählen –</option>
+                            <option th:each="d : ${devices}"
+                                    th:value="${d.id}"
+                                    th:text="${d.type + ' (Raum ' + d.roomnumber + ')'}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Untersuchungszeit</div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="startTime">Startzeit</label>
+                        <input type="datetime-local" class="form-control"
+                               id="startTime" name="startTime" required />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="endTime">Endzeit</label>
+                        <input type="datetime-local" class="form-control"
+                               id="endTime" name="endTime" required />
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <button type="submit" class="btn btn-primary">Reservierung speichern</button>
+            <a th:href="@{/reservation/list}" class="btn btn-default" style="margin-left:10px;">Abbrechen</a>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
