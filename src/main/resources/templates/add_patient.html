@@ -25,6 +25,11 @@
         <h4>Neuen Patienten registrieren</h4>
     </div>
 
+    <!-- Fehlermeldung -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <strong>Fehler:</strong> <span th:text="${errorMessage}"></span>
+    </div>
+
     <div class="card">
         <form th:action="@{/patient/save}" th:object="${patient}" method="post">
 

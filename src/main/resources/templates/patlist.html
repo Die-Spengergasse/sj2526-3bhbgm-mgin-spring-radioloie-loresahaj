@@ -24,6 +24,11 @@
         <h4>Patientenliste</h4>
     </div>
 
+    <!-- Fehlermeldung -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <strong>Fehler:</strong> <span th:text="${errorMessage}"></span>
+    </div>
+
     <div class="card">
         <div style="margin-bottom:15px;">
             <a th:href="@{/patient/add}" class="btn btn-primary btn-sm">+ Neuen Patienten registrieren</a>
